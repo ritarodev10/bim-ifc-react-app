@@ -1,5 +1,5 @@
 const IFCViewer = () => {
-  return <div>IFCViewer</div>;
+  return <div className="h-screen w-screen text-red-100">IFCxxViewer</div>;
 };
 
 export default IFCViewer;
