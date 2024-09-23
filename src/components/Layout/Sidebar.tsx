@@ -18,7 +18,7 @@ const Sidebar = ({
   toggleSidebar: () => void;
   openSidebar: () => void;
 }) => {
-  const { setLoadedModelId, setLoadedFile } = useModelStore();
+  const { setLoadedModelId, setLoadedFile, ifcViewer } = useModelStore();
 
   const handleUpload = () => {
     const fileInput = document.createElement("input");
@@ -39,6 +39,14 @@ const Sidebar = ({
     console.log(`Existing model clicked: ${modelId}`);
     setLoadedModelId(modelId);
     openSidebar();
+  };
+
+  const handleRemoveModel = () => {
+    if (ifcViewer) {
+      ifcViewer.IFC.loader.ifcManager.dispose();
+    }
+    setLoadedFile(null);
+    location.reload();
   };
 
   const menuItems = [
@@ -180,7 +188,7 @@ const Sidebar = ({
             </nav>
             <div
               className="flex items-center gap-5 ml-6 mb-6 cursor-pointer"
-              onClick={() => setLoadedFile(null)}
+              onClick={handleRemoveModel}
             >
               <SquareQuestionLineDuotoneIcon className="w-10 h-10 text-primary" />
               <span
